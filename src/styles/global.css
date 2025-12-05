@@ -1,0 +1,27 @@
+/* Import color variables */
+@import './colors.css';
+
+/* Import Neutra Text font */
+@import url('https://fonts.googleapis.com/css2?family=Neutra+Text:wght@400;500;600;700&display=swap');
+
+/* Global styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Neutra Text', sans-serif;
+  background-color: var(--color-grey);
+  color: var(--color-black);
+  line-height: 1.6;
+}
+
+/* Utility classes */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
