@@ -1,5 +1,5 @@
 /* eslint-disable react-refresh/only-export-components */
-import { createContext, useContext, useReducer } from "react";
+import { createContext, useContext, useReducer, useMemo } from "react";
 
 // Create the context - this is like a "global state container"
 const AppContext = createContext();
@@ -112,34 +112,40 @@ export function AppProvider({ children }) {
   const [state, dispatch] = useReducer(appReducer, initialState);
 
   // Helper functions to update state (these make it easier to use)
-  const actions = {
-    setLoading: (loading) =>
-      dispatch({ type: ActionTypes.SET_LOADING, payload: loading }),
+  // useMemo ensures actions object is stable and doesn't cause unnecessary re-renders
+  const actions = useMemo(
+    () => ({
+      setLoading: (loading) =>
+        dispatch({ type: ActionTypes.SET_LOADING, payload: loading }),
 
-    setData: (data) => dispatch({ type: ActionTypes.SET_DATA, payload: data }),
+      setData: (data) =>
+        dispatch({ type: ActionTypes.SET_DATA, payload: data }),
 
-    setError: (error) =>
-      dispatch({ type: ActionTypes.SET_ERROR, payload: error }),
+      setError: (error) =>
+        dispatch({ type: ActionTypes.SET_ERROR, payload: error }),
 
-    setPage: (page) => dispatch({ type: ActionTypes.SET_PAGE, payload: page }),
+      setPage: (page) =>
+        dispatch({ type: ActionTypes.SET_PAGE, payload: page }),
 
-    setPageSize: (size) =>
-      dispatch({ type: ActionTypes.SET_PAGE_SIZE, payload: size }),
+      setPageSize: (size) =>
+        dispatch({ type: ActionTypes.SET_PAGE_SIZE, payload: size }),
 
-    setSearch: (query) =>
-      dispatch({ type: ActionTypes.SET_SEARCH, payload: query }),
+      setSearch: (query) =>
+        dispatch({ type: ActionTypes.SET_SEARCH, payload: query }),
 
-    setApiFilter: (key, value) =>
-      dispatch({
-        type: ActionTypes.SET_API_FILTER,
-        payload: { key, value },
-      }),
+      setApiFilter: (key, value) =>
+        dispatch({
+          type: ActionTypes.SET_API_FILTER,
+          payload: { key, value },
+        }),
 
-    resetApiFilters: () => dispatch({ type: ActionTypes.RESET_API_FILTERS }),
+      resetApiFilters: () => dispatch({ type: ActionTypes.RESET_API_FILTERS }),
 
-    setActiveTab: (tab) =>
-      dispatch({ type: ActionTypes.SET_ACTIVE_TAB, payload: tab }),
-  };
+      setActiveTab: (tab) =>
+        dispatch({ type: ActionTypes.SET_ACTIVE_TAB, payload: tab }),
+    }),
+    [dispatch]
+  );
 
   // Provide state and actions to all children components
   return (
