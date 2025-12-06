@@ -1,8 +1,8 @@
 /* Import color variables */
-@import './colors.css';
+@import "./colors.css";
 
 /* Import Neutra Text font */
-@import url('https://fonts.googleapis.com/css2?family=Neutra+Text:wght@400;500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Neutra+Text:wght@400;500;600;700&display=swap");
 
 /* Global styles */
 * {
@@ -12,10 +12,16 @@
 }
 
 body {
-  font-family: 'Neutra Text', sans-serif;
+  font-family: "Neutra Text", sans-serif;
   background-color: var(--color-grey);
   color: var(--color-black);
   line-height: 1.6;
+}
+
+/* Override default button styles */
+button {
+  color: var(--color-black) !important;
+  background-color: white !important;
 }
 
 /* Utility classes */
@@ -24,4 +30,3 @@ body {
   margin: 0 auto;
   padding: 20px;
 }
-
